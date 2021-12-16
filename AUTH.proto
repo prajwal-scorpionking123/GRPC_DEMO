@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+option go_package = "GRPCDEMO/AUTH";
+
+package AUTH;
+
+service AUTHENTICATION {
+    rpc Authenticate(LoginRequest) returns (LoginReply){
+
+    }
+    rpc Register(RegisterRequest) returns (RegisterReply){
+
+    }
+}
+service GuploadService {
+  rpc Upload(stream Chunk) returns (UploadStatus) {}
+}
+
+message Chunk {
+  bytes Content = 1;
+}
+
+enum UploadStatusCode {
+  Unknown = 0;
+  Ok = 1;
+  Failed = 2;
+}
+
+message UploadStatus {
+  string Message = 1;
+  UploadStatusCode Code = 2;
+}
+message LoginRequest{
+    string username  = 1;
+    string password  = 2;
+}
+
+message RegisterRequest{
+    string name  = 1;
+    string username =2;
+    string email = 3;
+    string password =4;
+}
+message LoginReply{
+  string message = 1;
+}
+message RegisterReply{
+  string message  = 1;
+}
+
